@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password</title>
+    <style>
+        body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:0; }
+        .page { min-height:100vh; display:flex; align-items:center; justify-content:center; }
+        .card { width:100%; max-width:420px; background:white; border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,0.08); padding:32px; }
+        .card h1 { margin:0 0 24px; font-size:24px; }
+        .field { width:100%; margin-bottom:18px; }
+        .field label { display:block; margin-bottom:8px; font-weight:600; }
+        .field input { width:100%; padding:12px 14px; border:1px solid #d2d6dc; border-radius:10px; }
+        .button { width:100%; padding:12px 14px; border:none; border-radius:10px; background:#10b981; color:white; font-weight:700; cursor:pointer; }
+        .links { display:flex; justify-content:space-between; margin-top:12px; }
+        .links a { color:#2563eb; text-decoration:none; }
+        .error { color:#b91c1c; font-size:0.95rem; margin-top:6px; }
+    </style>
+</head>
+<body>
+<div class="page">
+    <div class="card">
+        <h1>Reset Password</h1>
+        <form method="POST" action="{{ url('/reset-password') }}">
+            @csrf
+            <input type="hidden" name="token" value="{{ $token }}">
+            <div class="field">
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" value="{{ old('email', $email) }}" required autofocus>
+                @error('email')<div class="error">{{ $message }}</div>@enderror
+            </div>
+            <div class="field">
+                <label for="password">New Password</label>
+                <input id="password" type="password" name="password" required>
+                @error('password')<div class="error">{{ $message }}</div>@enderror
+            </div>
+            <div class="field">
+                <label for="password_confirmation">Confirm Password</label>
+                <input id="password_confirmation" type="password" name="password_confirmation" required>
+            </div>
+            <button type="submit" class="button">Reset Password</button>
+        </form>
+        <div class="links">
+            <a href="{{ url('/login') }}">Login</a>
+            <a href="{{ url('/register') }}">Register</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

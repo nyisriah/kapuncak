@@ -1,0 +1,7 @@
+laravel/.env
+laravel/vendor
+laravel/node_modules
+laravel/storage/logs
+laravel/storage/framework
+laravel/storage/*.key
+laravel/public/storage
